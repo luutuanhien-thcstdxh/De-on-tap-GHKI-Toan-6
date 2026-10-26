@@ -22,7 +22,7 @@
                     <i class="fa-solid fa-calculator text-2xl text-amber-300"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold tracking-tight">Lưu Tuấn Hiện Gv THCS Xuân Hòa - Trang Web ôn Tập Giữa Kỳ I - Toán Lớp 6</h1>
+                    <h1 class="text-xl font-bold tracking-tight">Ôn Tập Giữa Kỳ I - Toán Lớp 6</h1>
                     <p class="text-xs text-blue-200">Sách Kết Nối Tri Thức Với Cuộc Sống (70% Trắc nghiệm - 30% Tự luận)</p>
                 </div>
             </div>
@@ -39,7 +39,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-5xl w-full mx-auto px-4 py-8 flex-grow">
+    <main class="max-w-5xl w-full mx-auto px-4 py-8 flex-grow flex flex-col justify-center">
 
         <!-- VIEW 1: HOME / EXAM SELECTOR -->
         <template x-if="currentExam === null">
@@ -51,9 +51,20 @@
                     <div class="relative z-10 max-w-2xl">
                         <span class="bg-amber-400 text-slate-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Hệ thống ôn thi tương tác</span>
                         <h2 class="text-3xl font-extrabold mt-3 mb-2">Chinh Phục Điểm 10 Toán 6</h2>
-                        <p class="text-blue-50 text-sm leading-relaxed">
+                        <p class="text-blue-50 text-sm leading-relaxed mb-6">
                             Bộ 5 đề kiểm tra bám sát ma trận chuẩn GDPT 2018. Bao gồm Phần I (12 câu trắc nghiệm nhiều lựa chọn), Phần II (2 câu Đúng/Sai), Phần III (4 câu Trả lời ngắn), và Phần IV (3 bài Tự luận chi tiết). Làm bài trực tiếp, tải ảnh bài giải viết tay và nhận điểm số + lời giải ngay lập tức!
                         </p>
+                        
+                        <!-- Thêm thông tin GV thiết kế -->
+                        <div class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/30 text-white shadow-sm hover:bg-white/30 transition duration-300">
+                            <div class="w-9 h-9 rounded-full bg-amber-400 flex items-center justify-center text-slate-900 shadow-inner">
+                                <i class="fa-solid fa-user-tie text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-blue-100 uppercase tracking-widest leading-tight font-medium">Thiết kế & Biên soạn</p>
+                                <p class="text-base font-extrabold tracking-wide text-white drop-shadow-md">GV Lưu Tuấn Hiện</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
