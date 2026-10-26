@@ -10,39 +10,71 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        /* Hiệu ứng chữ 3D cho tên trường */
+        .text-3d-school {
+            text-shadow: 1px 1px 0px #1e40af, 2px 2px 0px #1e3a8a, 3px 3px 4px rgba(0,0,0,0.6);
+        }
+        
+        /* Hiệu ứng chữ 3D cho Tiêu đề chính */
+        .text-3d-title {
+            text-shadow: 1px 1px 0 #0284c7, 2px 2px 0 #0369a1, 3px 3px 0 #075985, 4px 4px 0 #0f172a, 5px 5px 12px rgba(0,0,0,0.5);
+        }
+        
+        /* Hiệu ứng chữ 3D cho Tiêu đề phụ (Toán 6) */
+        .text-3d-subtitle {
+            text-shadow: 1px 1px 0 #b45309, 2px 2px 0 #92400e, 3px 3px 4px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col" x-data="mathQuizApp()">
 
     <!-- Header -->
     <header class="bg-blue-700 text-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center space-x-3 cursor-pointer" @click="resetToHome()">
-                <div class="bg-white/10 p-2.5 rounded-xl backdrop-blur-sm">
-                    <i class="fa-solid fa-calculator text-2xl text-amber-300"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold tracking-tight">Ôn Tập Giữa Kỳ I - Toán Lớp 6</h1>
-                    <p class="text-xs text-blue-200">Sách Kết Nối Tri Thức Với Cuộc Sống (70% Trắc nghiệm - 30% Tự luận)</p>
+        <div class="max-w-7xl mx-auto px-4 py-3 grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+            
+            <!-- Left: Tên Trường -->
+            <div class="flex justify-center md:justify-start items-center">
+                <div class="text-center md:text-left cursor-pointer hover:scale-105 transition-transform duration-300" @click="resetToHome()">
+                    <h2 class="text-sm sm:text-base font-extrabold text-amber-300 uppercase tracking-wider text-3d-school leading-tight">
+                        Trường THCS Xuân Hòa
+                    </h2>
+                    <p class="text-xs sm:text-sm font-bold text-white uppercase tracking-widest text-3d-school leading-tight mt-0.5">
+                        Phân hiệu Tân Dương
+                    </p>
                 </div>
             </div>
             
-            <div class="flex items-center gap-3">
-                <!-- Thêm thông tin GV thiết kế vào góc trên bên phải -->
-                <div class="flex items-center gap-2.5 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 text-white shadow-sm hover:bg-white/20 transition duration-300">
+            <!-- Center: App Title (3D) -->
+            <div class="flex flex-col items-center justify-center text-center cursor-pointer group" @click="resetToHome()">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white text-3d-title uppercase tracking-widest group-hover:scale-105 transition-transform duration-300">
+                    Ôn Tập Giữa Kì I
+                </h1>
+                <h2 class="text-lg sm:text-xl font-extrabold text-amber-400 text-3d-subtitle mt-1 uppercase tracking-widest group-hover:scale-105 transition-transform duration-300">
+                    Toán Lớp 6
+                </h2>
+            </div>
+            
+            <!-- Right: GV Info & Timer -->
+            <div class="flex items-center justify-center md:justify-end gap-3">
+                <div class="flex items-center gap-2.5 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 text-white shadow-sm hover:bg-white/20 transition duration-300">
                     <div class="w-8 h-8 rounded-full bg-amber-400 flex items-center justify-center text-slate-900 shadow-inner">
                         <i class="fa-solid fa-user-tie text-xs"></i>
                     </div>
-                    <div class="text-left">
+                    <div class="text-left hidden lg:block">
                         <p class="text-[9px] text-blue-200 uppercase tracking-widest leading-tight font-medium">Thiết kế & Biên soạn</p>
-                        <p class="text-sm font-bold tracking-wide text-white drop-shadow-md">GV Lưu Tuấn Hiện</p>
+                        <p class="text-xs font-bold tracking-wide text-white drop-shadow-md">GV Lưu Tuấn Hiện</p>
+                    </div>
+                    <!-- Hiển thị ngắn gọn trên điện thoại -->
+                    <div class="text-left block lg:hidden">
+                        <p class="text-xs font-bold text-white drop-shadow-md">GV Hiện</p>
                     </div>
                 </div>
 
                 <template x-if="currentExam !== null && !isSubmitted">
-                    <div class="bg-blue-800/80 px-4 py-2 rounded-xl border border-blue-600 flex items-center gap-2 text-sm font-medium">
-                        <i class="fa-regular fa-clock text-amber-300"></i>
-                        <span>Thời gian: <span x-text="formatTime(timeLeft)" class="font-bold text-amber-300"></span></span>
+                    <div class="bg-blue-800/80 px-3 py-1.5 rounded-xl border border-blue-600 flex items-center gap-2 text-sm font-medium">
+                        <i class="fa-regular fa-clock text-amber-300 animate-pulse"></i>
+                        <span class="font-bold text-amber-300" x-text="formatTime(timeLeft)"></span>
                     </div>
                 </template>
             </div>
@@ -279,10 +311,22 @@
                                         <div class="flex items-center gap-3">
                                             <label class="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg cursor-pointer border border-slate-300 transition text-sm font-medium">
                                                 <i class="fa-solid fa-camera text-blue-600"></i> Tải ảnh bài giải viết tay
-                                                <input type="file" accept="image/*" class="hidden" :disabled="isSubmitted">
+                                                <input type="file" accept="image/*" class="hidden" :disabled="isSubmitted" @change="handleImageUpload($event, qIndex)">
                                             </label>
                                             <span class="text-xs text-slate-400 italic">Hỗ trợ JPG, PNG</span>
                                         </div>
+
+                                        <!-- Image Preview (Hiển thị ảnh đã tải lên) -->
+                                        <template x-if="userImages.part4 && userImages.part4[qIndex]">
+                                            <div class="mt-3 relative inline-block">
+                                                <img :src="userImages.part4[qIndex]" class="max-w-full h-auto max-h-64 rounded-lg border border-slate-200 shadow-sm" alt="Bài làm của học sinh">
+                                                <template x-if="!isSubmitted">
+                                                    <button @click="userImages.part4[qIndex] = null" class="absolute -top-2 -right-2 bg-rose-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-rose-600 shadow-md">
+                                                        <i class="fa-solid fa-xmark text-xs"></i>
+                                                    </button>
+                                                </template>
+                                            </div>
+                                        </template>
 
                                         <!-- Hướng dẫn chấm (Hiện khi nộp) -->
                                         <template x-if="isSubmitted">
@@ -308,6 +352,24 @@
                 </div>
             </div>
         </template>
+
+        <!-- Custom Warning Modal -->
+        <template x-if="showWarning">
+            <div class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/50 backdrop-blur-sm px-4">
+                <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 text-center animate-fade-in">
+                    <div class="w-16 h-16 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 shadow-inner">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Chưa đủ thời gian nộp bài!</h3>
+                    <p class="text-slate-600 mb-6 text-sm">
+                        Bạn cần làm bài ít nhất 45 phút (quá nửa thời gian) mới có thể nộp bài. Hãy tận dụng thời gian còn lại để kiểm tra lại thật kỹ các đáp án nhé!
+                    </p>
+                    <button @click="showWarning = false" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-xl w-full shadow-md transition">
+                        Đã hiểu, quay lại làm bài
+                    </button>
+                </div>
+            </div>
+        </template>
     </main>
 
     <!-- Footer -->
@@ -321,6 +383,7 @@
             return {
                 currentExam: null,
                 isSubmitted: false,
+                showWarning: false,
                 calculatedScore: 0,
                 timeLeft: 5400, // 90 minutes in seconds
                 timer: null,
@@ -328,6 +391,9 @@
                     part1: {},
                     part2: {},
                     part3: {},
+                    part4: {}
+                },
+                userImages: {
                     part4: {}
                 },
                 exams: [
@@ -596,8 +662,10 @@
                 startExam(index) {
                     this.currentExam = index;
                     this.isSubmitted = false;
+                    this.showWarning = false;
                     this.calculatedScore = 0;
                     this.userAnswers = { part1: {}, part2: {}, part3: {}, part4: {} };
+                    this.userImages = { part4: {} };
                     this.timeLeft = 5400;
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     this.startTimer();
@@ -606,14 +674,17 @@
                 resetToHome() {
                     this.currentExam = null;
                     this.isSubmitted = false;
+                    this.showWarning = false;
                     clearInterval(this.timer);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 },
 
                 resetExam() {
                     this.isSubmitted = false;
+                    this.showWarning = false;
                     this.calculatedScore = 0;
                     this.userAnswers = { part1: {}, part2: {}, part3: {}, part4: {} };
+                    this.userImages = { part4: {} };
                     this.timeLeft = 5400;
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     this.startTimer();
@@ -626,7 +697,7 @@
                             this.timeLeft--;
                         } else if (this.timeLeft === 0 && !this.isSubmitted) {
                             clearInterval(this.timer);
-                            this.submitExam();
+                            this.submitExam(true);
                         }
                     }, 1000);
                 },
@@ -637,8 +708,16 @@
                     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
                 },
 
-                submitExam() {
+                submitExam(isForceSubmit = false) {
                     if (this.isSubmitted) return;
+
+                    // Chỉ cho phép nộp bài khi thời gian còn lại <= 2700s (đã làm > 45 phút) hoặc khi hết giờ (force)
+                    if (!isForceSubmit && this.timeLeft > 2700) {
+                        this.showWarning = true;
+                        return;
+                    }
+
+                    this.showWarning = false;
                     clearInterval(this.timer);
                     let score = 0;
                     const exam = this.exams[this.currentExam];
@@ -675,6 +754,18 @@
                     this.calculatedScore = Number(score.toFixed(2));
                     this.isSubmitted = true;
                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+
+                handleImageUpload(event, qIndex) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            if (!this.userImages.part4) this.userImages.part4 = {};
+                            this.userImages.part4[qIndex] = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    }
                 }
             }
         }
