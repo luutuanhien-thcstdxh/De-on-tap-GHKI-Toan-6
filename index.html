@@ -15,21 +15,21 @@
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col" x-data="mathQuizApp()">
 
     <!-- Header -->
-    <header class="bg-indigo-700 text-white shadow-lg sticky top-0 z-50">
+    <header class="bg-blue-700 text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-3 cursor-pointer" @click="resetToHome()">
                 <div class="bg-white/10 p-2.5 rounded-xl backdrop-blur-sm">
                     <i class="fa-solid fa-calculator text-2xl text-amber-300"></i>
                 </div>
                 <div>
-                                                                             <h1 class="text-xl font-bold tracking-tight">Hệ thống ôn Tập Giữa Kỳ I - Toán Lớp 6-Lưu Tuấn Hiện THCS Xuân Hòa-Phân hiệu Tân Dương</h1>
-                                                                               <p class="text-xs text-indigo-200">Sách Kết Nối Tri Thức Với Cuộc Sống (70% Trắc nghiệm - 30% Tự luận)</p>
+                    <h1 class="text-xl font-bold tracking-tight">Ôn Tập Giữa Kỳ I - Toán Lớp 6</h1>
+                    <p class="text-xs text-blue-200">Sách Kết Nối Tri Thức Với Cuộc Sống (70% Trắc nghiệm - 30% Tự luận)</p>
                 </div>
             </div>
             
             <div class="flex items-center gap-3">
                 <template x-if="currentExam !== null && !isSubmitted">
-                    <div class="bg-indigo-800/80 px-4 py-2 rounded-xl border border-indigo-600 flex items-center gap-2 text-sm font-medium">
+                    <div class="bg-blue-800/80 px-4 py-2 rounded-xl border border-blue-600 flex items-center gap-2 text-sm font-medium">
                         <i class="fa-regular fa-clock text-amber-300"></i>
                         <span>Thời gian: <span x-text="formatTime(timeLeft)" class="font-bold text-amber-300"></span></span>
                     </div>
@@ -44,35 +44,35 @@
         <!-- VIEW 1: HOME / EXAM SELECTOR -->
         <template x-if="currentExam === null">
             <div class="space-y-8">
-                <div class="bg-gradient-to-r from-indigo-600 to-violet-600 text-white p-8 rounded-3xl shadow-xl relative overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white p-8 rounded-3xl shadow-xl relative overflow-hidden">
                     <div class="absolute right-0 bottom-0 opacity-10 translate-x-10 translate-y-10">
                         <i class="fa-solid fa-graduation-cap text-9xl"></i>
                     </div>
                     <div class="relative z-10 max-w-2xl">
                         <span class="bg-amber-400 text-slate-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Hệ thống ôn thi tương tác</span>
                         <h2 class="text-3xl font-extrabold mt-3 mb-2">Chinh Phục Điểm 10 Toán 6</h2>
-                        <p class="text-indigo-100 text-sm leading-relaxed">
-                            Bộ 5 đề kiểm tra bám sát ma trận chuẩn GDPT 2018. Bao gồm Phần I (12 câu trắc nghiệm nhiều lựa chọn), Phần II (2 câu Đúng/Sai), Phần III (4 câu Trả lời ngắn), và Phần IV (3 bài Tự luận chi tiết). Làm bài trực tiếp và nhận điểm số + lời giải ngay lập tức!
+                        <p class="text-blue-50 text-sm leading-relaxed">
+                            Bộ 5 đề kiểm tra bám sát ma trận chuẩn GDPT 2018. Bao gồm Phần I (12 câu trắc nghiệm nhiều lựa chọn), Phần II (2 câu Đúng/Sai), Phần III (4 câu Trả lời ngắn), và Phần IV (3 bài Tự luận chi tiết). Làm bài trực tiếp, tải ảnh bài giải viết tay và nhận điểm số + lời giải ngay lập tức!
                         </p>
                     </div>
                 </div>
 
                 <div>
                     <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-folder-open text-indigo-600"></i> Chọn đề ôn tập để bắt đầu:
+                        <i class="fa-solid fa-folder-open text-blue-600"></i> Chọn đề ôn tập để bắt đầu:
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                         <template x-for="(exam, index) in exams" :key="index">
-                            <div @click="startExam(index)" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 hover:border-indigo-300 cursor-pointer flex flex-col justify-between group">
+                            <div @click="startExam(index)" class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 hover:border-blue-300 cursor-pointer flex flex-col justify-between group">
                                 <div>
                                     <div class="flex justify-between items-start mb-4">
-                                        <span class="bg-indigo-50 text-indigo-600 font-bold text-xs px-3 py-1.5 rounded-lg group-hover:bg-indigo-600 group-hover:text-white transition" x-text="`ĐỀ SỐ 0${index + 1}`"></span>
+                                        <span class="bg-blue-50 text-blue-600 font-bold text-xs px-3 py-1.5 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition" x-text="`ĐỀ SỐ 0${index + 1}`"></span>
                                         <span class="text-xs text-slate-400"><i class="fa-regular fa-clock mr-1"></i>90 phút</span>
                                     </div>
-                                    <h4 class="font-bold text-slate-800 text-lg mb-2 group-hover:text-indigo-600 transition" x-text="exam.title"></h4>
+                                    <h4 class="font-bold text-slate-800 text-lg mb-2 group-hover:text-blue-600 transition" x-text="exam.title"></h4>
                                     <p class="text-xs text-slate-500 leading-relaxed mb-4">Trắc nghiệm (7.0đ) + Tự luận (3.0đ) chuẩn cấu trúc đánh giá giữa kỳ I.</p>
                                 </div>
-                                <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-indigo-600 font-semibold text-sm">
+                                <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-blue-600 font-semibold text-sm">
                                     <span>Vào làm bài</span>
                                     <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                                 </div>
@@ -88,12 +88,12 @@
             <div class="space-y-8">
                 <!-- Top Navigation & Score Banner -->
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200 gap-4">
-                    <button @click="resetToHome()" class="text-sm font-semibold text-slate-600 hover:text-indigo-600 flex items-center gap-2 transition">
+                    <button @click="resetToHome()" class="text-sm font-semibold text-slate-600 hover:text-blue-600 flex items-center gap-2 transition">
                         <i class="fa-solid fa-arrow-left"></i> Quay lại danh sách đề
                     </button>
                     <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
                         <template x-if="!isSubmitted">
-                            <button @click="submitExam()" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-md transition text-sm">
+                            <button @click="submitExam()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-md transition text-sm">
                                 Nộp bài & Xem kết quả
                             </button>
                         </template>
@@ -127,7 +127,7 @@
                 <!-- EXAM CONTENT CONTAINER -->
                 <div class="space-y-10">
                     <div class="text-center bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest" x-text="`ĐỀ SỐ 0${currentExam + 1}`"></span>
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-widest" x-text="`ĐỀ SỐ 0${currentExam + 1}`"></span>
                         <h2 class="text-2xl font-extrabold text-slate-800 mt-1" x-text="exams[currentExam].title"></h2>
                     </div>
 
@@ -142,25 +142,25 @@
                             <template x-for="(q, qIndex) in exams[currentExam].part1" :key="qIndex">
                                 <div class="p-5 rounded-xl border border-slate-100 bg-slate-50/50 space-y-3">
                                     <div class="font-semibold text-slate-800 flex items-start gap-2">
-                                        <span class="bg-indigo-100 text-indigo-700 text-xs px-2.5 py-1 rounded-md font-bold mt-0.5" x-text="`Câu ${qIndex + 1}`"></span>
+                                        <span class="bg-blue-100 text-blue-700 text-xs px-2.5 py-1 rounded-md font-bold mt-0.5" x-text="`Câu ${qIndex + 1}`"></span>
                                         <span class="flex-1" x-text="q.question"></span>
                                     </div>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pl-0 sm:pl-12">
                                         <template x-for="(opt, optIndex) in q.options" :key="optIndex">
-                                            <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 bg-white hover:border-indigo-400 cursor-pointer transition text-sm"
+                                            <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 bg-white hover:border-blue-400 cursor-pointer transition text-sm"
                                                    :class="{
                                                        'bg-emerald-50 border-emerald-500 font-semibold text-emerald-900': isSubmitted && optIndex === q.correct,
                                                        'bg-rose-50 border-rose-500 text-rose-900': isSubmitted && userAnswers.part1[qIndex] === optIndex && optIndex !== q.correct
                                                    }">
-                                                <input type="radio" :name="`part1_${qIndex}`" :value="optIndex" x-model.number="userAnswers.part1[qIndex]" :disabled="isSubmitted" class="text-indigo-600 focus:ring-indigo-500">
+                                                <input type="radio" :name="`part1_${qIndex}`" :value="optIndex" x-model.number="userAnswers.part1[qIndex]" :disabled="isSubmitted" class="text-blue-600 focus:ring-blue-500">
                                                 <span x-text="opt"></span>
                                             </label>
                                         </template>
                                     </div>
                                     <!-- Rationale -->
                                     <template x-if="isSubmitted">
-                                        <div class="mt-2 pl-0 sm:pl-12 text-xs text-slate-600 bg-indigo-50/60 p-3 rounded-lg border border-indigo-100">
-                                            <span class="font-bold text-indigo-700">Hướng dẫn giải:</span> <span x-text="q.rationale"></span>
+                                        <div class="mt-2 pl-0 sm:pl-12 text-xs text-slate-600 bg-blue-50/60 p-3 rounded-lg border border-blue-100">
+                                            <span class="font-bold text-blue-700">Hướng dẫn giải:</span> <span x-text="q.rationale"></span>
                                         </div>
                                     </template>
                                 </div>
@@ -179,22 +179,22 @@
                             <template x-for="(q, qIndex) in exams[currentExam].part2" :key="qIndex">
                                 <div class="p-5 rounded-xl border border-slate-100 bg-slate-50/50 space-y-4">
                                     <div class="font-semibold text-slate-800 flex items-start gap-2">
-                                        <span class="bg-indigo-100 text-indigo-700 text-xs px-2.5 py-1 rounded-md font-bold mt-0.5" x-text="`Câu ${qIndex + 1}`"></span>
+                                        <span class="bg-blue-100 text-blue-700 text-xs px-2.5 py-1 rounded-md font-bold mt-0.5" x-text="`Câu ${qIndex + 1}`"></span>
                                         <span class="flex-1" x-text="q.question"></span>
                                     </div>
                                     <div class="space-y-3 pl-0 sm:pl-12">
                                         <template x-for="(item, itemIndex) in q.items" :key="itemIndex">
                                             <div class="p-3 bg-white rounded-xl border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm">
                                                 <div class="flex items-start gap-2 flex-1">
-                                                    <span class="font-bold text-indigo-600" x-text="['a)', 'b)', 'c)', 'd)'][itemIndex]"></span>
+                                                    <span class="font-bold text-blue-600" x-text="['a)', 'b)', 'c)', 'd)'][itemIndex]"></span>
                                                     <span x-text="item.text"></span>
                                                 </div>
                                                 <div class="flex items-center gap-4">
                                                     <label class="flex items-center gap-1.5 cursor-pointer font-medium">
-                                                        <input type="radio" :name="`part2_${qIndex}_${itemIndex}`" :checked="userAnswers.part2[qIndex]?.[itemIndex] === true" @change="setPart2(qIndex, itemIndex, true)" :disabled="isSubmitted" class="text-indigo-600"> Đúng
+                                                        <input type="radio" :name="`part2_${qIndex}_${itemIndex}`" :checked="userAnswers.part2[qIndex]?.[itemIndex] === true" @change="setPart2(qIndex, itemIndex, true)" :disabled="isSubmitted" class="text-blue-600"> Đúng
                                                     </label>
                                                     <label class="flex items-center gap-1.5 cursor-pointer font-medium">
-                                                        <input type="radio" :name="`part2_${qIndex}_${itemIndex}`" :checked="userAnswers.part2[qIndex]?.[itemIndex] === false" @change="setPart2(qIndex, itemIndex, false)" :disabled="isSubmitted" class="text-indigo-600"> Sai
+                                                        <input type="radio" :name="`part2_${qIndex}_${itemIndex}`" :checked="userAnswers.part2[qIndex]?.[itemIndex] === false" @change="setPart2(qIndex, itemIndex, false)" :disabled="isSubmitted" class="text-blue-600"> Sai
                                                     </label>
                                                 </div>
                                             </div>
@@ -202,8 +202,8 @@
                                     </div>
                                     <!-- Rationale for Part II -->
                                     <template x-if="isSubmitted">
-                                        <div class="mt-2 pl-0 sm:pl-12 text-xs text-slate-600 bg-indigo-50/60 p-3 rounded-lg border border-indigo-100 space-y-1">
-                                            <p class="font-bold text-indigo-700">Giải thích chi tiết:</p>
+                                        <div class="mt-2 pl-0 sm:pl-12 text-xs text-slate-600 bg-blue-50/60 p-3 rounded-lg border border-blue-100 space-y-1">
+                                            <p class="font-bold text-blue-700">Giải thích chi tiết:</p>
                                             <template x-for="(item, itemIndex) in q.items">
                                                 <p><span class="font-semibold" x-text="['a)', 'b)', 'c)', 'd)'][itemIndex]"></span> <span class="font-bold" :class="item.isCorrect ? 'text-emerald-700' : 'text-rose-700'" x-text="item.isCorrect ? '[Đúng]' : '[Sai]'"></span> <span x-text="item.rationale"></span></p>
                                             </template>
@@ -226,13 +226,13 @@
                                 <div class="p-5 rounded-xl border border-slate-100 bg-slate-50/50 space-y-3 flex flex-col justify-between">
                                     <div>
                                         <div class="font-semibold text-slate-800 flex items-start gap-2 mb-3">
-                                            <span class="bg-indigo-100 text-indigo-700 text-xs px-2.5 py-1 rounded-md font-bold mt-0.5" x-text="`Câu ${qIndex + 1}`"></span>
+                                            <span class="bg-blue-100 text-blue-700 text-xs px-2.5 py-1 rounded-md font-bold mt-0.5" x-text="`Câu ${qIndex + 1}`"></span>
                                             <span class="flex-1" x-text="q.question"></span>
                                         </div>
                                     </div>
                                     <div class="space-y-2">
                                         <div class="flex items-center gap-3">
-                                            <input type="text" x-model="userAnswers.part3[qIndex]" :disabled="isSubmitted" placeholder="Nhập đáp số..." class="w-full px-4 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-sm bg-white">
+                                            <input type="text" x-model="userAnswers.part3[qIndex]" :disabled="isSubmitted" placeholder="Nhập đáp số..." class="w-full px-4 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 text-sm bg-white">
                                         </div>
                                         <template x-if="isSubmitted">
                                             <div class="text-xs p-2.5 rounded-lg border" :class="isPart3Correct(qIndex) ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-rose-50 text-rose-800 border-rose-200'">
@@ -249,25 +249,36 @@
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
                         <div class="border-b border-slate-100 pb-4">
                             <h3 class="text-lg font-bold text-slate-900">PHẦN IV. TỰ LUẬN (3,0 điểm)</h3>
-                            <p class="text-xs text-slate-500 mt-1">Trình bày chi tiết lời giải ra giấy hoặc vào ô bên dưới. Đáp án và hướng dẫn giải chi tiết sẽ hiện sau khi nộp bài.</p>
+                            <p class="text-xs text-slate-500 mt-1">Trình bày chi tiết lời giải ra giấy hoặc vào ô bên dưới. Học sinh có thể tải ảnh bài giải viết tay lên. Đáp án và hướng dẫn giải chi tiết sẽ hiện sau khi nộp bài.</p>
                         </div>
 
                         <div class="space-y-6">
                             <template x-for="(q, qIndex) in exams[currentExam].part4" :key="qIndex">
                                 <div class="p-5 rounded-xl border border-slate-100 bg-slate-50/50 space-y-4">
                                     <div class="font-bold text-slate-800 flex items-start gap-2">
-                                        <span class="bg-indigo-100 text-indigo-700 text-xs px-2.5 py-1 rounded-md font-bold mt-0.5" x-text="`Bài ${qIndex + 1} (${q.score}đ)`"></span>
+                                        <span class="bg-blue-100 text-blue-700 text-xs px-2.5 py-1 rounded-md font-bold mt-0.5" x-text="`Bài ${qIndex + 1} (${q.score}đ)`"></span>
                                         <span class="flex-1" x-text="q.question"></span>
                                     </div>
 
                                     <div class="pl-0 sm:pl-12 space-y-3">
-                                        <textarea x-model="userAnswers.part4[qIndex]" :disabled="isSubmitted" placeholder="Học sinh có thể viết nháp hoặc trình bày lời giải tại đây..." rows="4" class="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-sm bg-white"></textarea>
+                                        <!-- Text Nháp -->
+                                        <textarea x-model="userAnswers.part4[qIndex]" :disabled="isSubmitted" placeholder="Học sinh có thể viết nháp lời giải bằng văn bản tại đây..." rows="3" class="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 text-sm bg-white"></textarea>
                                         
-                                        <template x-if="isSubmitted">
-                                            <div class="bg-indigo-50/80 p-4 rounded-xl border border-indigo-100 space-y-2">
-                                            <p class="text-xs font-bold text-indigo-700 uppercase tracking-wide"><i class="fa-solid fa-circle-check mr-1"></i> Hướng dẫn chấm & Lời giải chi tiết:</p>
-                                            <p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line" x-text="q.solution"></p>
+                                        <!-- File Upload Box -->
+                                        <div class="flex items-center gap-3">
+                                            <label class="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg cursor-pointer border border-slate-300 transition text-sm font-medium">
+                                                <i class="fa-solid fa-camera text-blue-600"></i> Tải ảnh bài giải viết tay
+                                                <input type="file" accept="image/*" class="hidden" :disabled="isSubmitted">
+                                            </label>
+                                            <span class="text-xs text-slate-400 italic">Hỗ trợ JPG, PNG</span>
                                         </div>
+
+                                        <!-- Hướng dẫn chấm (Hiện khi nộp) -->
+                                        <template x-if="isSubmitted">
+                                            <div class="bg-blue-50/80 p-4 rounded-xl border border-blue-100 space-y-2 mt-4">
+                                                <p class="text-xs font-bold text-blue-700 uppercase tracking-wide"><i class="fa-solid fa-circle-check mr-1"></i> Hướng dẫn chấm & Lời giải chi tiết:</p>
+                                                <p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line" x-text="q.solution"></p>
+                                            </div>
                                         </template>
                                     </div>
                                 </div>
@@ -278,7 +289,7 @@
                     <!-- Bottom Submit Button -->
                     <template x-if="!isSubmitted">
                         <div class="text-center pt-4">
-                            <button @click="submitExam()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-4 rounded-2xl shadow-lg transition text-base">
+                            <button @click="submitExam()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-2xl shadow-lg transition text-base">
                                 Nộp Bài & Xem Điểm Số Trắc Nghiệm Ngay
                             </button>
                         </div>
@@ -352,7 +363,7 @@
                             { question: "Một căn phòng hình chữ nhật có chiều dài 8m, chiều rộng 6m. Người ta lát nền bằng các viên gạch vuông cạnh 50cm. Hỏi cần bao nhiêu viên gạch?", correctAnswer: "192", rationale: "Diện tích phòng = 48 m² = 480000 cm². Diện tích 1 viên gạch = 2500 cm². Số viên gạch = 480000 : 2500 = 192." }
                         ],
                         part4: [
-                            { score: 1.0, question: "Bài 1: a) Tính hợp lý: A = 25 . 68 + 25 . 32 - 500. b) Tìm x biết: 2^x + 2^(x+2) = 80.", solution: "a) A = 25 . (68 + 32) - 500 = 25 . 100 - 500 = 2500 - 500 = 2000.\nb) 2^x . (1 + 2^2) = 80 => 2^x . 5 = 80 => 2^x = 16 = 2^4 => x = 4." },
+                            { score: 1.0, question: "Bài 1: a) Tính hợp lý: A = 25 . 68 + 25 . 32 - 500. b) Tìm số tự nhiên x biết: 3 . (x - 2) = 12.", solution: "a) A = 25 . (68 + 32) - 500 = 25 . 100 - 500 = 2500 - 500 = 2000.\nb) 3 . (x - 2) = 12 => x - 2 = 12 : 3 => x - 2 = 4 => x = 6." },
                             { score: 1.0, question: "Bài 2: Số học sinh khối 6 khoảng 150 đến 200 em. Khi xếp hàng 12, 15, 18 đều thừa 2 học sinh. Tính số học sinh khối 6.", solution: "Gọi số học sinh là x (150 ≤ x ≤ 200). (x - 2) ⋮ 12, 15, 18 => (x - 2) ∈ BC(12, 15, 18).\nBCNN(12, 15, 18) = 180 => x - 2 = 180 => x = 182 (Thỏa mãn)." },
                             { score: 1.0, question: "Bài 3: Mảnh đất hình chữ nhật dài 12m, rộng 8m. Làm lối đi xung quanh rộng 1m, phần còn lại trồng rau. a) Tính diện tích trồng rau. b) Chi phí trồng rau là 30 000 đ/m². Tính tổng chi phí.", solution: "a) Chiều dài phần trồng rau: 12 - 2 = 10m. Chiều rộng: 8 - 2 = 6m. Diện tích = 60 m².\nb) Tổng chi phí = 60 . 30 000 = 1 800 000 đồng." }
                         ]
@@ -400,7 +411,7 @@
                             { question: "Một chiếc khăn thêu hình thoi có hai đường chéo dài 20cm và 30cm. Tính diện tích hình thoi đó.", correctAnswer: "300", rationale: "Diện tích = (20 . 30) / 2 = 300 cm²." }
                         ],
                         part4: [
-                            { score: 1.0, question: "Bài 1: a) Tính hợp lý: C = 38 . 73 + 27 . 38 - 800. b) Tìm x biết: (2x - 1)^3 = 125.", solution: "a) C = 38 . (73 + 27) - 800 = 38 . 100 - 800 = 3000.\nb) (2x - 1)^3 = 5^3 => 2x - 1 = 5 => 2x = 6 => x = 3." },
+                            { score: 1.0, question: "Bài 1: a) Tính hợp lý: C = 38 . 73 + 27 . 38 - 800. b) Tìm x biết: 4 . (2x - 1) = 20.", solution: "a) C = 38 . (73 + 27) - 800 = 38 . 100 - 800 = 3000.\nb) 4 . (2x - 1) = 20 => 2x - 1 = 5 => 2x = 6 => x = 3." },
                             { score: 1.0, question: "Bài 2: Ba bạn An, Bình, Cường trực nhật cách nhau 5 ngày, 10 ngày, 15 ngày. Sau ít nhất bao nhiêu ngày lại cùng trực nhật?", solution: "Số ngày là BCNN(5, 10, 15) = 30 ngày." },
                             { score: 1.0, question: "Bài 3: Sân chữ nhật dài 15m, rộng 6m. Lát gạch vuông cạnh 50cm, giá 25 000 đ/viên. a) Số viên gạch? b) Tổng tiền?", solution: "a) Diện tích sân = 90m² = 900 000 cm². Diện tích 1 viên = 2500 cm². Số viên = 360 viên.\nb) Tổng tiền = 360 . 25 000 = 9 000 000 đồng." }
                         ]
@@ -544,7 +555,7 @@
                             { question: "Một khu vườn hình vuông cạnh 10m. Tính diện tích khu vườn đó.", correctAnswer: "100", rationale: "Diện tích = 10 . 10 = 100 m²." }
                         ],
                         part4: [
-                            { score: 1.0, question: "Bài 1: a) Tính hợp lý: F = 15 . 141 + 59 . 15 - 500. b) Tìm x biết: 5^(x-1) + 5^x = 150.", solution: "a) F = 15 . (141 + 59) - 500 = 15 . 200 - 500 = 2500.\nb) 5^(x-1) . (1 + 5) = 150 => 5^(x-1) . 6 = 150 => 5^(x-1) = 25 = 5^2 => x - 1 = 2 => x = 3." },
+                            { score: 1.0, question: "Bài 1: a) Tính hợp lý: F = 15 . 141 + 59 . 15 - 500. b) Tìm số tự nhiên x biết: 5 . (2x + 1) = 35.", solution: "a) F = 15 . (141 + 59) - 500 = 15 . 200 - 500 = 2500.\nb) 5 . (2x + 1) = 35 => 2x + 1 = 7 => 2x = 6 => x = 3." },
                             { score: 1.0, question: "Bài 2: Số học sinh khối 6 từ 250 đến 300 em. Xếp hàng 12, 16, 18 đều vừa đủ. Tính số học sinh.", solution: "Số học sinh là BC(12, 16, 18) trong khoảng 250 đến 300. BCNN(12, 16, 18) = 144. Bội trong khoảng là 288." },
                             { score: 1.0, question: "Bài 3: Hình chữ nhật chu vi 40m, chiều dài hơn chiều rộng 4m. a) Tính dài và rộng. b) Chi phí làm sân giá 120 000 đ/m². Tính tổng chi phí.", solution: "a) Nửa chu vi = 20m. Chiều dài = (20 + 4) : 2 = 12m. Chiều rộng = 8m.\nb) Diện tích = 96m². Tổng chi phí = 96 . 120 000 = 11 520 000 đồng." }
                         ]
