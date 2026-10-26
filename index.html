@@ -34,9 +34,6 @@
                         <span>Thời gian: <span x-text="formatTime(timeLeft)" class="font-bold text-amber-300"></span></span>
                     </div>
                 </template>
-                <button @click="showGithubGuide = true" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3 py-2 rounded-lg font-medium transition flex items-center gap-1.5 shadow-sm">
-                    <i class="fa-brands fa-github text-sm"></i> 
-                </button>
             </div>
         </div>
     </header>
@@ -194,10 +191,10 @@
                                                 </div>
                                                 <div class="flex items-center gap-4">
                                                     <label class="flex items-center gap-1.5 cursor-pointer font-medium">
-                                                        <input type="radio" :name="`part2_${qIndex}_${itemIndex}`" :value="true" x-model="userAnswers.part2[qIndex][itemIndex]" :disabled="isSubmitted" class="text-indigo-600"> Đúng
+                                                        <input type="radio" :name="`part2_${qIndex}_${itemIndex}`" :checked="userAnswers.part2[qIndex]?.[itemIndex] === true" @change="setPart2(qIndex, itemIndex, true)" :disabled="isSubmitted" class="text-indigo-600"> Đúng
                                                     </label>
                                                     <label class="flex items-center gap-1.5 cursor-pointer font-medium">
-                                                        <input type="radio" :name="`part2_${qIndex}_${itemIndex}`" :value="false" x-model="userAnswers.part2[qIndex][itemIndex]" :disabled="isSubmitted" class="text-indigo-600"> Sai
+                                                        <input type="radio" :name="`part2_${qIndex}_${itemIndex}`" :checked="userAnswers.part2[qIndex]?.[itemIndex] === false" @change="setPart2(qIndex, itemIndex, false)" :disabled="isSubmitted" class="text-indigo-600"> Sai
                                                     </label>
                                                 </div>
                                             </div>
@@ -208,7 +205,7 @@
                                         <div class="mt-2 pl-0 sm:pl-12 text-xs text-slate-600 bg-indigo-50/60 p-3 rounded-lg border border-indigo-100 space-y-1">
                                             <p class="font-bold text-indigo-700">Giải thích chi tiết:</p>
                                             <template x-for="(item, itemIndex) in q.items">
-                                                <p><span class="font-semibold" x-text="['a)', 'b)', 'c)', 'd)'][itemIndex]"></span> <span x-text="item.rationale"></span></p>
+                                                <p><span class="font-semibold" x-text="['a)', 'b)', 'c)', 'd)'][itemIndex]"></span> <span class="font-bold" :class="item.isCorrect ? 'text-emerald-700' : 'text-rose-700'" x-text="item.isCorrect ? '[Đúng]' : '[Sai]'"></span> <span x-text="item.rationale"></span></p>
                                             </template>
                                         </div>
                                     </template>
@@ -238,7 +235,7 @@
                                             <input type="text" x-model="userAnswers.part3[qIndex]" :disabled="isSubmitted" placeholder="Nhập đáp số..." class="w-full px-4 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-sm bg-white">
                                         </div>
                                         <template x-if="isSubmitted">
-                                            <div class="text-xs p-2.5 rounded-lg border" :class="String(userAnswers.part3[qIndex]).trim() === String(q.correctAnswer) ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-rose-50 text-rose-800 border-rose-200'">
+                                            <div class="text-xs p-2.5 rounded-lg border" :class="isPart3Correct(qIndex) ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-rose-50 text-rose-800 border-rose-200'">
                                                 <span class="font-bold">Đáp án đúng:</span> <span x-text="q.correctAnswer"></span> | <span x-text="q.rationale"></span>
                                             </div>
                                         </template>
@@ -294,43 +291,6 @@
         <p>Hệ thống Ôn tập Kiểm tra Giữa kỳ I môn Toán 6 - Chuẩn kiến thức SGK Kết Nối Tri Thức Với Cuộc Sống.</p>
     </footer>
 
-    <!-- GITHUB DEPLOYMENT GUIDE MODAL -->
-    <template x-if="showGithubGuide">
-        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div class="bg-white max-w-2xl w-full rounded-3xl shadow-2xl overflow-hidden animate-scale-up">
-                <div class="bg-indigo-700 text-white p-6 flex justify-between items-center">
-                    <h3 class="font-bold text-lg flex items-center gap-2">
-                        <i class="fa-brands fa-github text-2xl"></i> Hướng dẫn đưa code lên GitHub & GitHub Pages
-                    </h3>
-                    <button @click="showGithubGuide = false" class="text-white/80 hover:text-white text-xl">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                <div class="p-6 space-y-4 text-sm text-slate-700 max-h-[75vh] overflow-y-auto">
-                    <p class="font-medium text-slate-900">Để đưa trang web bài tập tương tác này lên GitHub để học sinh truy cập miễn phí qua mạng, bạn làm theo các bước sau:</p>
-                    <ol class="list-decimal pl-5 space-y-2">
-                        <li><strong>Tạo tài khoản & Kho chứa (Repository):</strong> Đăng nhập vào <a href="https://github.com" target="_blank" class="text-indigo-600 underline font-semibold">GitHub</a>, nhấn nút <strong>New</strong> ở góc trên bên trái để tạo repository mới (Ví dụ đặt tên là: <code>toan-lop-6-giua-ky-1</code>). Chọn chế độ <strong>Public</strong>.</li>
-                        <li><strong>Tạo file index.html:</strong> Trên giao diện repo mới tạo, chọn <strong>Add file</strong> -> <strong>Create new file</strong>. Đặt tên file đúng chính tả là <code>index.html</code>.</li>
-                        <li><strong>Dán code:</strong> Sao chép toàn bộ mã nguồn của file HTML này và dán vào trong trình soạn thảo trên GitHub. Nhấn nút <strong>Commit changes...</strong> ở góc trên bên phải để lưu.</li>
-                        <li><strong>Bật GitHub Pages:</strong> 
-                            <ul class="list-disc pl-5 mt-1 space-y-1 text-xs text-slate-600">
-                                tab <strong>Settings</strong> của repository của bạn.
-                                <li>Ở menu bên trái, chọn mục <strong>Pages</strong>.</li>
-                                <li>Tại phần <strong>Build and deployment</strong> -> <strong>Branch</strong>, chọn nhánh <code>main</code> (hoặc <code>master</code>) và thư mục <code>/ (root)</code>, sau đó bấm <strong>Save</strong>.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Hoàn tất:</strong> Chờ 1-2 phút, GitHub sẽ cung cấp cho bạn một đường link công khai (ví dụ: <code>https://username.github.io/toan-lop-6-giua-ky-1</code>). Bạn có thể gửi link này cho học sinh làm bài trên máy tính hoặc điện thoại!</li>
-                    </ol>
-                </div>
-                <div class="bg-slate-50 px-6 py-4 border-t border-slate-100 text-right">
-                    <button @click="showGithubGuide = false" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2 rounded-xl text-sm transition">
-                        Đã hiểu, đóng hướng dẫn
-                    </button>
-                </div>
-            </div>
-        </div>
-    </template>
-
     <!-- Script Application Logic -->
     <script>
         function mathQuizApp() {
@@ -340,7 +300,6 @@
                 calculatedScore: 0,
                 timeLeft: 5400, // 90 minutes in seconds
                 timer: null,
-                showGithubGuide: false,
                 userAnswers: {
                     part1: {},
                     part2: {},
@@ -357,7 +316,7 @@
                             { question: "Trong biểu thức 7^4, cơ số là:", options: ["4", "28", "7", "11"], correct: 2, rationale: "Trong lũy thừa 7^4, số 7 là cơ số và 4 là số mũ." },
                             { question: "Kết quả của phép tính 2^3 . 3 - 5 là:", options: ["19", "1", "13", "4"], correct: 0, rationale: "2^3 . 3 - 5 = 8 . 3 - 5 = 24 - 5 = 19." },
                             { question: "Cho tổng S = 12 + 24 + 36 + x. Điều kiện của x để S chia hết cho 6 là:", options: ["x chia hết cho 6", "x chia 6 dư 1", "x là số lẻ bất kỳ", "x chia 6 dư 2"], correct: 0, rationale: "Các số hạng 12, 24, 36 đều chia hết cho 6, vậy để S chia hết cho 6 thì x phải chia hết cho 6." },
-                            { question: "Số nào sau đây chia hết cho cả 3 và 5?", options: ["135", "240", "305", "123"], correct: 1, rationale: "Số 240 tận cùng là 0 (chia hết cho 5) và có tổng các chữ số là 2+4+0 = 6 chia hết cho 3." },
+                            { question: "Số nào sau đây chia hết cho cả 3 và 5?", options: ["125", "240", "305", "123"], correct: 1, rationale: "Số 240 tận cùng là 0 (chia hết cho 5) và có tổng các chữ số là 2+4+0 = 6 chia hết cho 3." },
                             { question: "Trong các số sau, số nào là hợp số?", options: ["11", "17", "21", "23"], correct: 2, rationale: "Số 21 chia hết cho 1, 3, 7, 21 nên 21 là hợp số. Các số còn lại là số nguyên tố." },
                             { question: "Ước chung lớn nhất của 18 và 30 là:", options: ["3", "6", "90", "15"], correct: 1, rationale: "18 = 2 . 3^2, 30 = 2 . 3 . 5 => ƯCLN(18, 30) = 2 . 3 = 6." },
                             { question: "Bội chung nhỏ nhất của 6 và 8 là:", options: ["48", "14", "24", "2"], correct: 2, rationale: "6 = 2 . 3, 8 = 2^3 => BCNN(6, 8) = 2^3 . 3 = 24." },
@@ -375,10 +334,10 @@
                                 ]
                             },
                             {
-                                question: "Cho hình thang cân ABCD có đáy lớn AB = 10 cm, đáy nhỏ CD = 6 cm, chiều cao h = 4 cm và cạnh bên AD = 5 cm.",
+                                question: "Cho hình thang cân ABCD có đáy lớn AB = 10 cm, đáy nhỏ CD = 4 cm, chiều cao h = 4 cm và cạnh bên AD = 5 cm.",
                                 items: [
-                                    { text: "Chu vi hình thang cân ABCD là 26 cm.", isCorrect: true, rationale: "Chu vi = AB + CD + AD + BC = 10 + 6 + 5 + 5 = 26 cm." },
-                                    { text: "Diện tích hình thang cân ABCD là 32 cm².", isCorrect: true, rationale: "Diện tích = (10 + 6) . 4 / 2 = 32 cm²." },
+                                    { text: "Chu vi hình thang cân ABCD là 24 cm.", isCorrect: true, rationale: "Chu vi = AB + CD + AD + BC = 10 + 4 + 5 + 5 = 24 cm." },
+                                    { text: "Diện tích hình thang cân ABCD là 28 cm².", isCorrect: true, rationale: "Diện tích = (10 + 4) . 4 / 2 = 28 cm²." },
                                     { text: "Hai góc kề một đáy của hình thang cân ABCD không bằng nhau.", isCorrect: false, rationale: "Tính chất hình thang cân là hai góc kề một đáy bằng nhau." },
                                     { text: "Hai đường chéo AC và BD có độ dài không bằng nhau.", isCorrect: false, rationale: "Hình thang cân có hai đường chéo bằng nhau." }
                                 ]
@@ -578,7 +537,7 @@
                         ],
                         part3: [
                             { question: "Tính giá trị biểu thức: F = 2^3 . 15 - 2^3 . 5.", correctAnswer: "80", rationale: "8 . (15 - 5) = 8 . 10 = 80." },
-                            { question: "Tìm x biết 45 ⋮ x và x > 10.", correctAnswer: "15", rationale: "Các ước của 45 là 1, 3, 5, 9, 15, 45. Lớn hơn 10 gồm 15 và 45 (nhưng đề hỏi x thường là ước, ở đây có 15 hoặc 45, thông thường đáp số chuẩn là 15)." },
+                            { question: "Tìm số tự nhiên x biết 45 ⋮ x và 10 < x < 45.", correctAnswer: "15", rationale: "Các ước của 45 là 1, 3, 5, 9, 15, 45. Chỉ có 15 thỏa mãn 10 < x < 45." },
                             { question: "Một đội y tế có 24 bác sĩ và 108 y sĩ. Có thể chia đội y tế đó nhiều nhất thành bao nhiêu tổ?", correctAnswer: "12", rationale: "ƯCLN(24, 108) = 12." },
                             { question: "Một khu vườn hình vuông cạnh 10m. Tính diện tích khu vườn đó.", correctAnswer: "100", rationale: "Diện tích = 10 . 10 = 100 m²." }
                         ],
@@ -589,6 +548,26 @@
                         ]
                     }
                 ],
+
+                setPart2(qIdx, itemIdx, value) {
+                    if (!this.userAnswers.part2[qIdx]) this.userAnswers.part2[qIdx] = {};
+                    this.userAnswers.part2[qIdx][itemIdx] = value;
+                },
+
+                normalizeAnswer(value) {
+                    return String(value ?? '')
+                        .toLowerCase()
+                        .replace(/\s+/g, '')
+                        .replace(/;/g, ',')
+                        .replace(/(\d)\.(?=\d{3}(?!\d))/g, '$1');
+                },
+
+                isPart3Correct(idx) {
+                    const given = this.userAnswers.part3[idx];
+                    if (given === undefined) return false;
+                    const q = this.exams[this.currentExam].part3[idx];
+                    return this.normalizeAnswer(given) === this.normalizeAnswer(q.correctAnswer);
+                },
 
                 startExam(index) {
                     this.currentExam = index;
@@ -664,7 +643,7 @@
 
                     // Score Part III (4 questions, 0.5 pt each = 2.0 pts max)
                     exam.part3.forEach((q, idx) => {
-                        if (this.userAnswers.part3[idx] !== undefined && String(this.userAnswers.part3[idx]).trim() === String(q.correctAnswer)) {
+                        if (this.isPart3Correct(idx)) {
                             score += 0.5;
                         }
                     });
