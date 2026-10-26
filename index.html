@@ -22,7 +22,7 @@
                     <i class="fa-solid fa-calculator text-2xl text-amber-300"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold tracking-tight"> Hệ thống ôn Tập Giữa Kỳ I - Toán Lớp 6 của Thầy Lưu Tuấn Hiện THCS Xuân Hòa-Phân hiệu Tân Dương</h1>
+                    <h1 class="text-xl font-bold tracking-tight">Ôn Tập Giữa Kỳ I - Toán Lớp 6</h1>
                     <p class="text-xs text-indigo-200">Sách Kết Nối Tri Thức Với Cuộc Sống (70% Trắc nghiệm - 30% Tự luận)</p>
                 </div>
             </div>
@@ -249,7 +249,7 @@
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
                         <div class="border-b border-slate-100 pb-4">
                             <h3 class="text-lg font-bold text-slate-900">PHẦN IV. TỰ LUẬN (3,0 điểm)</h3>
-                            <p class="text-xs text-slate-500 mt-1">Trình bày chi tiết lời giải ra giấy và đối chiếu với Hướng dẫn giải chi tiết bên dưới.</p>
+                            <p class="text-xs text-slate-500 mt-1">Trình bày chi tiết lời giải ra giấy hoặc vào ô bên dưới. Đáp án và hướng dẫn giải chi tiết sẽ hiện sau khi nộp bài.</p>
                         </div>
 
                         <div class="space-y-6">
@@ -263,10 +263,12 @@
                                     <div class="pl-0 sm:pl-12 space-y-3">
                                         <textarea x-model="userAnswers.part4[qIndex]" :disabled="isSubmitted" placeholder="Học sinh có thể viết nháp hoặc trình bày lời giải tại đây..." rows="4" class="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-sm bg-white"></textarea>
                                         
-                                        <div class="bg-indigo-50/80 p-4 rounded-xl border border-indigo-100 space-y-2">
+                                        <template x-if="isSubmitted">
+                                            <div class="bg-indigo-50/80 p-4 rounded-xl border border-indigo-100 space-y-2">
                                             <p class="text-xs font-bold text-indigo-700 uppercase tracking-wide"><i class="fa-solid fa-circle-check mr-1"></i> Hướng dẫn chấm & Lời giải chi tiết:</p>
                                             <p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line" x-text="q.solution"></p>
                                         </div>
+                                        </template>
                                     </div>
                                 </div>
                             </template>
